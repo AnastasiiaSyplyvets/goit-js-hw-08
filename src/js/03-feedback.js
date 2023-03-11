@@ -39,13 +39,13 @@ function handleMessageContent(event) {
 // Достаем данные з хранилища
 
 function getLocalStrData() {
-    const savedData = localStorage.getItem(STORAGE_KEY);
+    const savedData = JSON.parse(localStorage.getItem(STORAGE_KEY));
 
 
    if(savedData) {
 
-    messageContentEl.textContent = savedData;
-    emailContentEl.value = savedData;
+    messageContentEl.textContent = savedData.message || '';
+    emailContentEl.value = savedData.email || '';
     
    }
 
