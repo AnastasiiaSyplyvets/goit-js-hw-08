@@ -23,23 +23,11 @@ const dataObj =  {};
 
 getLocalStrData();
 
-// Функция частоты ввода сообщения
-messageContentEl.addEventListener('input', throttle(handleMessageContent, 500));
-
-function handleMessageContent(event) {
-
-  const messageValue = event.target.value;
-
-
-  localStorage.setItem(STORAGE_KEY, messageValue);
-}
-
-
 
 // Достаем данные з хранилища
 
 function getLocalStrData() {
-    const savedData = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    const savedData = localStorage.getItem(STORAGE_KEY);
 
 
    if(savedData) {
@@ -49,26 +37,23 @@ function getLocalStrData() {
     
    }
 
-//    console.log(messageContentEl.textContent)
-//    console.log(emailContentEl.value)
 
 }
 
 // Делегируем событие на форму
 
-formEl.addEventListener('input', event => {
-   
+formEl.addEventListener('input', throttle(handleFormInput, 1000) )
 
-    dataObj[event.target.name] = event.target.value;
+function handleFormInput(event) {
+  
 
-    console.log(dataObj)
-
-    const savedName = localStorage.setItem(STORAGE_KEY, JSON.stringify(dataObj));
-
+        dataObj[event.target.name] = event.target.value;
     
+    
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(dataObj));
 
-    // console.log(dataObj[event.target.name])
-})
+ 
+}
 
 // отправка форми
 
@@ -78,6 +63,8 @@ function onFormSubmit(event) {
     event.preventDefault();
 
     event.currentTarget.reset();
+
+    console.log(JSON.parse(localStorage.getItem(STORAGE_KEY)));
 
     localStorage.removeItem(STORAGE_KEY);
     

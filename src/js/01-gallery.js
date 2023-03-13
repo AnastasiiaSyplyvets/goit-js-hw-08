@@ -39,43 +39,7 @@ function createImgEl ({preview, original, description}) {
 const galleryMarkupEl = galleryItems.map(img => createImgEl(img)).join('');
 
 
-
 galleryEl.insertAdjacentHTML("afterbegin", galleryMarkupEl);
 
 
-
-// Вішаємо слухача на галерею
-
-
-galleryEl.addEventListener("click", (event) => {
-    event.preventDefault();
-if(event.target.nodeName !== "IMG") {
-return
-}
-
-
-// const instance = basicLightbox.create(
-// 	` <img src="${event.target.dataset.source}" width="800" height="600">`
-// )
-// instance.show();
-
-
-// ESC
-
-window.addEventListener('keydown', onEscKeyDown);
-
-function onEscKeyDown(event) {
-  
-  if(event.code === 'Escape') {
-    // instance.close();
-    closed.simplelightbox;
-  }
- 
-};
-
-});
-
-let gallery = new SimpleLightbox('.gallery a');
-gallery.on('show.simplelightbox', function () {
-	// Do something…
-});
+let gallery = new SimpleLightbox('.gallery a', {captionsData: "alt", captionDelay: 250 });
