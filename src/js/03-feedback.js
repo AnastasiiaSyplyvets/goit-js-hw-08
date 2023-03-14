@@ -69,4 +69,3 @@ function onFormSubmit(event) {
     localStorage.removeItem(STORAGE_KEY);
     
 }
- console.log("hellow")
