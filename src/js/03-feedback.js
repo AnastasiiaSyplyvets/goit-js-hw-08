@@ -18,7 +18,7 @@ const messageContentEl = document.querySelector('textarea');
 const STORAGE_KEY = 'feedback-form-state';
 
 // Обьект храниния данных для хранилища
-const dataObj =  {};
+let dataObj =  JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
 
 
 getLocalStrData();
@@ -27,7 +27,7 @@ getLocalStrData();
 // Достаем данные з хранилища
 
 function getLocalStrData() {
-    const savedData = localStorage.getItem(STORAGE_KEY);
+    const savedData = JSON.parse(localStorage.getItem(STORAGE_KEY));
 
 
    if(savedData) {
@@ -67,5 +67,5 @@ function onFormSubmit(event) {
     console.log(JSON.parse(localStorage.getItem(STORAGE_KEY)));
 
     localStorage.removeItem(STORAGE_KEY);
-    
+    dataObj = {};
 }
